@@ -14,7 +14,6 @@ class BasicCache(BaseCaching):
     def __init__(self):
         """Initialize the cache."""
         BaseCaching.__init__(self)
-        self.cache_data = {}
 
     def put(self, key, item):
         """
