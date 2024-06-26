@@ -5,9 +5,8 @@ LRUCache module.
 This module provides a caching system that uses the LRU
 (Least Recently Used) eviction policy.
 """
-
-BaseCaching = __import__('base_caching').BaseCaching
 from collections import OrderedDict
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCaching):
@@ -32,7 +31,8 @@ class LRUCache(BaseCaching):
                 self.cache_data.pop(key)
             # Add key to the end to mark it as recently used
             self.cache_data[key] = item
-            # If the cache exceeds the maximum size, remove the first item (least recently used)
+            # If the cache exceeds the maximum size
+            # remove the first item (least recently used)
             if len(self.cache_data) > self.MAX_ITEMS:
                 oldest_key = next(iter(self.cache_data))
                 print(f"DISCARD: {oldest_key}")
