@@ -5,7 +5,7 @@ BasicCache module.
 This module provides a basic caching system implementation.
 """
 
-BaseCaching = __import__('BaseCaching').BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class BasicCache(BaseCaching):
@@ -19,7 +19,7 @@ class BasicCache(BaseCaching):
             key: The key under which the item will be stored.
             item: The item to be stored in the cache.
         """
-        if key and item:
+        if key and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
@@ -32,4 +32,7 @@ class BasicCache(BaseCaching):
         Returns:
             The cached item, or None if the key is not in the cache.
         """
-        return self.cache_data.get(key)
+        if key is None or key not in self.cache_data:
+            return None
+        else:
+            return self.cache_data[key]
