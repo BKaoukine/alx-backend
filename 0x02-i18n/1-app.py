@@ -8,6 +8,7 @@ an HTML template.
 
 Modules:
     flask: A micro web framework for Python.
+    flask_babel: A Flask extension for i18n and l10n.
 
 Functions:
     index(): Renders and returns the '0-index.html' template.
@@ -21,15 +22,20 @@ from flask import Flask, render_template
 from flask_babel import Babel
 
 
-class Config():
+class Config:
     """Configuration for Babel."""
 
     LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
 # Initialize the Flask application
 app = Flask(__name__)
-babel = Babel(app, default_locale=Config.LANGUAGES[0], default_timezone='UTC')
+app.config.from_object(Config)
+
+# Initialize Babel
+babel = Babel(app)
 
 
 @app.route("/")
